@@ -15,6 +15,7 @@ public class CensusAnalyser {
         try {
             if (type != IndiaCensusCSV.class)
                 throw new CensusAnalyserException("Invalid Type", CensusAnalyserException.ExceptionType.INVALID_TYPE);
+            checkSeperator(seperator);
             Reader reader = Files.newBufferedReader(Paths.get(csvFilePath));
             CsvToBeanBuilder<IndiaCensusCSV> csvToBeanBuilder = new CsvToBeanBuilder<>(reader);
             csvToBeanBuilder.withType(type);
@@ -22,7 +23,6 @@ public class CensusAnalyser {
             csvToBeanBuilder.withSeparator(seperator);
             CsvToBean<IndiaCensusCSV> csvToBean = csvToBeanBuilder.build();
             Iterator<IndiaCensusCSV> censusCSVIterator = csvToBean.iterator();
-            ;
             Iterable<IndiaCensusCSV> csvIterable = () -> censusCSVIterator;
             int numOfEnteries = (int) StreamSupport.stream(csvIterable.spliterator(), false).count();
             return numOfEnteries;
@@ -30,6 +30,11 @@ public class CensusAnalyser {
             throw new CensusAnalyserException(e.getMessage(),
                     CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM);
         }
+    }
+
+    public void checkSeperator(char seperator) throws CensusAnalyserException {
+        if(seperator!=',')
+            throw new CensusAnalyserException("Invalid seperator", CensusAnalyserException.ExceptionType.INVALID_SEPERATOR);
     }
 
 }

@@ -39,4 +39,14 @@ public class CensusAnalyserTest {
             Assert.assertEquals("Invalid Type",e.getMessage());
         }
     }
+
+    @Test
+    public void givenIndiaCensusData_WhenTypeSeperator_ThrowsException(){
+        try {
+            CensusAnalyser censusAnalyser = new CensusAnalyser();
+            int numOfRecords = censusAnalyser.loadIndiaCensusData(INDIA_CENSUS_CSV_FILE_PATH,IndiaStateCode.class,',');
+        }catch (CensusAnalyserException e) {
+            Assert.assertEquals("Invalid Type",e.getMessage());
+        }
+    }
 }
