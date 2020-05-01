@@ -15,12 +15,12 @@ public class CensusAnalyser {
         checkType(IndiaCensusCSV.class,type);
         checkSeperator(seperator);
         try(Reader reader = Files.newBufferedReader(Paths.get(csvFilePath));){
-            CSVBuilder builder = CSVBuilderFactory.getBuilder();
+            ICSVBuilder builder = CSVBuilderFactory.getBuilder();
             Iterator<IndiaCensusCSV> censusCSVIterator = builder.getCSVFileIterator(reader, type ,seperator);
             return getCount(censusCSVIterator);
         } catch (IOException e) {
-            throw new CensusAnalyserException(e.getMessage(),
-                    CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM);
+            throw new CSVBuilderException(e.getMessage(),
+                    CSVBuilderException.ExceptionType.CENSUS_FILE_PROBLEM);
         }catch (RuntimeException e){
             throw new CensusAnalyserException("Invalid Header",
                     CensusAnalyserException.ExceptionType.INVALID_HEADER);
@@ -31,22 +31,22 @@ public class CensusAnalyser {
         checkType(IndiaStateCode.class,type);
         checkSeperator(seperator);
         try(Reader reader = Files.newBufferedReader(Paths.get(csvFilePath));) {
-            CSVBuilder builder = CSVBuilderFactory.getBuilder();
+            ICSVBuilder builder = CSVBuilderFactory.getBuilder();
             Iterator<IndiaStateCode> stateCSVIterator = builder.getCSVFileIterator(reader,type,seperator);
             return getCount(stateCSVIterator);
         } catch (IOException e) {
-            throw new CensusAnalyserException(e.getMessage(), CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM);
+            throw new CSVBuilderException(e.getMessage(), CSVBuilderException.ExceptionType.CENSUS_FILE_PROBLEM);
         }catch (RuntimeException e){
             throw new CensusAnalyserException("Invalid Header",CensusAnalyserException.ExceptionType.INVALID_HEADER);
         }
     }
 
-    public void checkSeperator(char seperator) throws CensusAnalyserException {
+    public void checkSeperator(char seperator) {
         if(seperator!=',')
             throw new CensusAnalyserException("Invalid seperator", CensusAnalyserException.ExceptionType.INVALID_SEPERATOR);
     }
 
-    public void checkType(Class requiredType, Class providedType ) throws CensusAnalyserException {
+    public void checkType(Class requiredType, Class providedType ){
         if(requiredType.equals(providedType)==false){
             throw new CensusAnalyserException("Invalid type",CensusAnalyserException.ExceptionType.INVALID_TYPE);
         }
