@@ -85,4 +85,15 @@ public class CensusAnalyserTest {
             Assert.assertEquals(CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM,e.type);
         }
     }
+
+    @Test
+    public void givenIndiaStateCodeData_WhenTypeIncorrect_ThrowsException(){
+        try {
+            CensusAnalyser censusAnalyser = new CensusAnalyser();
+            int numOfRecords = censusAnalyser.loadIndiaStateCode(INDIA_CENSUS_CSV_FILE_PATH,IndiaCensusCSV.class,',');
+        }catch (CensusAnalyserException e) {
+            Assert.assertEquals("Invalid type",e.getMessage());
+        }
+    }
+
 }
