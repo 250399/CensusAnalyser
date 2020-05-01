@@ -16,8 +16,4 @@ public class CensusAnalyserException extends RuntimeException {
         this.type = type;
     }
 
-    public CensusAnalyserException(String message, ExceptionType type, Throwable cause) {
-        super(message, cause);
-        this.type = type;
-    }
 }
