@@ -106,5 +106,15 @@ public class CensusAnalyserTest {
         }
     }
 
+    @Test
+    public void givenIndiaStateCodeData_WhenHeaderNotCorrect_ThrowsException(){
+        try {
+            CensusAnalyser censusAnalyser = new CensusAnalyser();
+            int numOfRecords = censusAnalyser.loadIndiaCensusData(INDIA_CENSUS_CSV_FILE_PATH,IndiaCensusCSV.class,',');
+        }catch (CensusAnalyserException e) {
+            Assert.assertEquals("Invalid Header",e.getMessage());
+        }
+    }
+
 
 }
