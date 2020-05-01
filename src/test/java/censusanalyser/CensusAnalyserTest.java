@@ -96,4 +96,15 @@ public class CensusAnalyserTest {
         }
     }
 
+    @Test
+    public void givenIndiaStateCodeData_WhenSeperator_ThrowsException(){
+        try {
+            CensusAnalyser censusAnalyser = new CensusAnalyser();
+            int numOfRecords = censusAnalyser.loadIndiaStateCode(INDIA_STATE_CODE_CSV_FILE_PATH,IndiaStateCode.class,'.');
+        }catch (CensusAnalyserException e) {
+            Assert.assertEquals("Invalid seperator",e.getMessage());
+        }
+    }
+
+
 }
