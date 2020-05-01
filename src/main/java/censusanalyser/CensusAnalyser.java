@@ -12,13 +12,11 @@ import java.util.stream.StreamSupport;
 
 public class CensusAnalyser {
     public int loadIndiaCensusData(String csvFilePath,Class type, char seperator)  {
+        checkType(IndiaCensusCSV.class,type);
+        checkSeperator(seperator);
         try(Reader reader = Files.newBufferedReader(Paths.get(csvFilePath));){
-            checkType(IndiaCensusCSV.class,type);
-            checkSeperator(seperator);
             Iterator<IndiaCensusCSV> censusCSVIterator = getCSVFileIterator(reader, type ,seperator);
-            Iterable<IndiaCensusCSV> csvIterable = () -> censusCSVIterator;
-            int numOfEnteries = (int) StreamSupport.stream(csvIterable.spliterator(), false).count();
-            return numOfEnteries;
+            return getCount(censusCSVIterator);
         } catch (IOException e) {
             throw new CensusAnalyserException(e.getMessage(),
                     CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM);
@@ -29,13 +27,11 @@ public class CensusAnalyser {
     }
 
     public int loadIndiaStateCode(String csvFilePath,Class type,char seperator)  {
+        checkType(IndiaStateCode.class,type);
+        checkSeperator(seperator);
         try(Reader reader = Files.newBufferedReader(Paths.get(csvFilePath));) {
-            checkType(IndiaStateCode.class,type);
-            checkSeperator(seperator);
             Iterator<IndiaStateCode> stateCSVIterator = getCSVFileIterator(reader,type,seperator);
-            Iterable<IndiaStateCode> csvStateIterable= ()-> stateCSVIterator;
-            int numOfEnteries=(int) StreamSupport.stream(csvStateIterable.spliterator(),false).count();
-            return numOfEnteries;
+            return getCount(stateCSVIterator);
         } catch (IOException e) {
             throw new CensusAnalyserException(e.getMessage(),
                     CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM);
@@ -50,7 +46,7 @@ public class CensusAnalyser {
     }
 
     public void checkType(Class requiredType, Class providedType ) throws CensusAnalyserException {
-        if(requiredType!=providedType){
+        if(requiredType.equals(providedType)==false){
             throw new CensusAnalyserException("Invalid type",CensusAnalyserException.ExceptionType.INVALID_TYPE);
         }
     }
@@ -64,4 +60,9 @@ public class CensusAnalyser {
         return csvToBean.iterator();
     }
 
+     <E> int getCount(Iterator<E> csvIterator){
+        Iterable<E> csvIterable = () -> csvIterator;
+        int numOfEnteries = (int) StreamSupport.stream(csvIterable.spliterator(), false).count();
+        return numOfEnteries;
+    }
 }

@@ -80,7 +80,7 @@ public class CensusAnalyserTest {
             CensusAnalyser censusAnalyser = new CensusAnalyser();
             ExpectedException exceptionRule = ExpectedException.none();
             exceptionRule.expect(CensusAnalyserException.class);
-            censusAnalyser.loadIndiaStateCode(WRONG_CSV_FILE_PATH,IndiaCensusCSV.class,',');
+            censusAnalyser.loadIndiaStateCode(WRONG_CSV_FILE_PATH,IndiaStateCode.class,',');
         } catch (CensusAnalyserException e) {
             Assert.assertEquals(CensusAnalyserException.ExceptionType.CENSUS_FILE_PROBLEM,e.type);
         }
@@ -90,7 +90,7 @@ public class CensusAnalyserTest {
     public void givenIndiaStateCodeData_WhenTypeIncorrect_ThrowsException(){
         try {
             CensusAnalyser censusAnalyser = new CensusAnalyser();
-            int numOfRecords = censusAnalyser.loadIndiaStateCode(INDIA_CENSUS_CSV_FILE_PATH,IndiaCensusCSV.class,',');
+            int numOfRecords = censusAnalyser.loadIndiaStateCode(INDIA_STATE_CODE_CSV_FILE_PATH,IndiaCensusCSV.class,',');
         }catch (CensusAnalyserException e) {
             Assert.assertEquals("Invalid type",e.getMessage());
         }
