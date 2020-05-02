@@ -116,5 +116,9 @@ public class CensusAnalyserTest {
         }
     }
 
-
+//    @Test
+//    public void sad(){
+//        JSONStateCensusdata jsonStateCensusdata= new JSONStateCensusdata();
+//           jsonStateCensusdata.addCelcusToJSON(INDIA_CENSUS_CSV_FILE_PATH);
+//    }
 }
