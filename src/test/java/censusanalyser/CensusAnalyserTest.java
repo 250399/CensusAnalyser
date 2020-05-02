@@ -1,9 +1,12 @@
 package censusanalyser;
 
+import com.google.gson.Gson;
 import com.opencsv.bean.CsvBindByName;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+
+import java.util.List;
 
 
 public class CensusAnalyserTest {
@@ -114,6 +117,16 @@ public class CensusAnalyserTest {
         }catch (CensusAnalyserException e) {
             Assert.assertEquals("Invalid Header",e.getMessage());
         }
+    }
+
+    @Test
+    public void getSortedState_InJsonFormat(){
+        CensusAnalyser censusAnalyser = new CensusAnalyser();
+        censusAnalyser.loadIndiaCensusData(INDIA_CENSUS_CSV_FILE_PATH,IndiaCensusCSV.class,',');
+        String sortedList = censusAnalyser.sortStatePopulationWise();
+        IndiaCensusCSV[] censusCSV=new Gson().fromJson(sortedList,IndiaCensusCSV[].class);
+        Assert.assertEquals("Andhra Pradesh",censusCSV[0].state);
+
     }
 
 //    @Test
