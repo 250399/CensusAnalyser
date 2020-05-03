@@ -119,19 +119,44 @@ public class CensusAnalyserTest {
         }
     }
 
+
+
     @Test
-    public void getSortedState_InJsonFormat(){
+    public void getSorted_StateName_InJsonFormat_StartState(){
         CensusAnalyser censusAnalyser = new CensusAnalyser();
         censusAnalyser.loadIndiaCensusData(INDIA_CENSUS_CSV_FILE_PATH,IndiaCensusCSV.class,',');
         String sortedList = censusAnalyser.sortStatePopulationWise();
         IndiaCensusCSV[] censusCSV=new Gson().fromJson(sortedList,IndiaCensusCSV[].class);
         Assert.assertEquals("Andhra Pradesh",censusCSV[0].state);
-
     }
 
-//    @Test
-//    public void sad(){
-//        JSONStateCensusdata jsonStateCensusdata= new JSONStateCensusdata();
-//           jsonStateCensusdata.addCelcusToJSON(INDIA_CENSUS_CSV_FILE_PATH);
-//    }
+    @Test
+    public void getSorted_StateName_InJsonFormat_EndState(){
+        CensusAnalyser censusAnalyser = new CensusAnalyser();
+        censusAnalyser.loadIndiaCensusData(INDIA_CENSUS_CSV_FILE_PATH,IndiaCensusCSV.class,',');
+        String sortedList = censusAnalyser.sortStatePopulationWise();
+        IndiaCensusCSV[] censusCSV=new Gson().fromJson(sortedList,IndiaCensusCSV[].class);
+        Assert.assertEquals("West Bengal",censusCSV[censusCSV.length-1].state);
+    }
+
+
+    @Test
+    public void getSorted_StateCode_InJSONFormat_StartState(){
+        CensusAnalyser censusAnalyser = new CensusAnalyser();
+        censusAnalyser.loadIndiaStateCode(INDIA_STATE_CODE_CSV_FILE_PATH,IndiaStateCode.class,',');
+        String sortedList = censusAnalyser.sortStateCodeDate();
+        IndiaStateCode[] indiaStateCodes = new Gson().fromJson(sortedList,IndiaStateCode[].class);
+        Assert.assertEquals("AD",indiaStateCodes[0].code);
+    }
+
+    @Test
+    public void getSorted_StateCode_InJSONFormat_EndState(){
+        CensusAnalyser censusAnalyser = new CensusAnalyser();
+        censusAnalyser.loadIndiaStateCode(INDIA_STATE_CODE_CSV_FILE_PATH,IndiaStateCode.class,',');
+        String sortedList = censusAnalyser.sortStateCodeDate();
+        IndiaStateCode[] indiaStateCodes = new Gson().fromJson(sortedList,IndiaStateCode[].class);
+        Assert.assertEquals("WB",indiaStateCodes[indiaStateCodes.length-1].code);
+    }
+
+
 }
