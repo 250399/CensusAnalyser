@@ -9,9 +9,9 @@ import java.util.List;
 
 public class CSVBuilder <E> implements ICSVBuilder{
 
-    public  Iterator<E> getCSVFileIterator(Reader reader, Class className)  {
-        return getCsvToBean(reader,className).iterator();
-    }
+//    public  Iterator<E> getCSVFileIterator(Reader reader, Class className)  {
+//        return getCsvToBean(reader,className).iterator();
+//    }
 
     @Override
     public List getCSVFileList(Reader reader, Class className) {
