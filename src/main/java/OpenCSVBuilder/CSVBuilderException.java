@@ -1,12 +1,13 @@
-package censusanalyser;
+package OpenCSVBuilder;
 
 public class CSVBuilderException extends RuntimeException{
-    enum ExceptionType{
+    public enum ExceptionType{
         CENSUS_FILE_PROBLEM,
-        UNABLE_TO_PARSE
+        UNABLE_TO_PARSE,
+        FIlE_NULL_EXCEPTION
     }
 
-    ExceptionType type;
+    public ExceptionType type;
 
     public CSVBuilderException(String message, ExceptionType type){
         super(message);

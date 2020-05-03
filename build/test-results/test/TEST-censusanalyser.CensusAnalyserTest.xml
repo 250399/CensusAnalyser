@@ -1,20 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="censusanalyser.CensusAnalyserTest" tests="14" skipped="0" failures="0" errors="0" timestamp="2020-05-03T01:38:23" hostname="DESKTOP-196HMRI" time="0.897">
+<testsuite name="censusanalyser.CensusAnalyserTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2020-05-03T21:17:44" hostname="DESKTOP-196HMRI" time="0.409">
   <properties/>
-  <testcase name="givenIndiaStateCodeData_WithWrongFile_ShouldThrowException" classname="censusanalyser.CensusAnalyserTest" time="0.015"/>
-  <testcase name="givenIndianCensusCSVFileReturnsCorrectRecords" classname="censusanalyser.CensusAnalyserTest" time="0.331"/>
-  <testcase name="getSorted_StateCode_InJSONFormat_EndState" classname="censusanalyser.CensusAnalyserTest" time="0.22"/>
-  <testcase name="givenIndiaStateCodeData_WhenTypeIncorrect_ThrowsException" classname="censusanalyser.CensusAnalyserTest" time="0.011"/>
-  <testcase name="getSorted_StateCode_InJSONFormat_StartState" classname="censusanalyser.CensusAnalyserTest" time="0.073"/>
-  <testcase name="givenIndiaCensusData_WhenHeaderNotCorrect_ThrowsException" classname="censusanalyser.CensusAnalyserTest" time="0.039"/>
-  <testcase name="givenIndiaStateCodeCSVFileReturnsCorrectRecords" classname="censusanalyser.CensusAnalyserTest" time="0.036"/>
-  <testcase name="givenIndiaStateCodeData_WhenHeaderNotCorrect_ThrowsException" classname="censusanalyser.CensusAnalyserTest" time="0.026"/>
-  <testcase name="givenIndiaStateCodeData_WhenSeperator_ThrowsException" classname="censusanalyser.CensusAnalyserTest" time="0.0"/>
-  <testcase name="getSorted_StateName_InJsonFormat_EndState" classname="censusanalyser.CensusAnalyserTest" time="0.054"/>
-  <testcase name="givenIndiaCensusData_WithWrongFile_ShouldThrowException" classname="censusanalyser.CensusAnalyserTest" time="0.0"/>
-  <testcase name="getSorted_StateName_InJsonFormat_StartState" classname="censusanalyser.CensusAnalyserTest" time="0.079"/>
-  <testcase name="givenIndiaCensusData_WhenTypeIncorrect_ThrowsException" classname="censusanalyser.CensusAnalyserTest" time="0.0"/>
-  <testcase name="givenIndiaCensusData_WhenSeperator_ThrowsException" classname="censusanalyser.CensusAnalyserTest" time="0.0"/>
+  <testcase name="getSorted_StatePopulation_InJSONFormat_EndState" classname="censusanalyser.CensusAnalyserTest" time="0.409"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

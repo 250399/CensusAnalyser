@@ -1,15 +1,18 @@
  package censusanalyser;
 
+import OpenCSVBuilder.CSVBuilderException;
+import OpenCSVBuilder.CSVBuilderFactory;
+import OpenCSVBuilder.ICSVBuilder;
+import OpenCSVBuilder.ISortBuilder;
+
 import java.io.IOException;
 import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Comparator;
-import java.util.Iterator;
 import java.util.List;
-import java.util.stream.StreamSupport;
 
-public class CensusAnalyser {
+ public class CensusAnalyser {
     List censusCSVList=null;
     List stateCSVList;
 
@@ -60,14 +63,22 @@ public class CensusAnalyser {
 //        return numOfEnteries;
 //    }
 
-    String sortStatePopulationWise(){
+    String sortStateNameWise(){
         Comparator<IndiaCensusCSV> comparator = Comparator.comparing(censusCSV->censusCSV.state);
-        return sortCSVData.sortData(comparator,censusCSVList);
+        ISortBuilder iSortBuilder = CSVBuilderFactory.getSortBuilder();
+        return iSortBuilder.sortData(comparator,censusCSVList);
     }
+
+     String sortStatePopulationWise(){
+         Comparator<IndiaCensusCSV> comparator = Comparator.comparing(censusCSV->censusCSV.population);
+         ISortBuilder iSortBuilder = CSVBuilderFactory.getSortBuilder();
+         return iSortBuilder.sortData(comparator,censusCSVList);
+     }
 
     String sortStateCodeDate(){
         Comparator<IndiaStateCode> comparator = Comparator.comparing(indiaStateCode -> indiaStateCode.code);
-        return sortCSVData.sortData(comparator, stateCSVList);
+        ISortBuilder iSortBuilder = CSVBuilderFactory.getSortBuilder();
+        return iSortBuilder.sortData(comparator, stateCSVList);
     }
 
 }

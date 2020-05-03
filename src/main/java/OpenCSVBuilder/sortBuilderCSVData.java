@@ -1,15 +1,16 @@
-package censusanalyser;
+package OpenCSVBuilder;
 
+import censusanalyser.CensusAnalyserException;
 import com.google.gson.Gson;
 
 import java.util.Comparator;
 import java.util.List;
 
-public class sortCSVData implements ISort{
+public class sortBuilderCSVData implements ISortBuilder {
 
      public String sortData(Comparator comparator, List CSVList){
         if(CSVList ==null|| CSVList.size()==0)
-            throw new CensusAnalyserException("Null census file",CensusAnalyserException.ExceptionType.CENSUS_FILE_NULL);
+            throw new CSVBuilderException("Null census file",CSVBuilderException.ExceptionType.FIlE_NULL_EXCEPTION);
         sort(comparator,CSVList);
         String sortedString = new Gson().toJson(CSVList);
         return sortedString;
