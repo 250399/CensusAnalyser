@@ -1,8 +1,8 @@
-package censusanalyser;
+package ExceptionClass;
 
 public class CensusAnalyserException extends RuntimeException {
 
-    enum ExceptionType {
+    public enum ExceptionType {
         INVALID_TYPE,
         INVALID_SEPERATOR,
         INVALID_HEADER,

@@ -1,24 +1,28 @@
  package censusanalyser;
 
+import ExceptionClass.CensusAnalyserException;
+import Models.IndiaCensusCSV;
+import Models.IndiaStateCode;
 import OpenCSVBuilder.CSVBuilderException;
 import OpenCSVBuilder.CSVBuilderFactory;
 import OpenCSVBuilder.ICSVBuilder;
 import OpenCSVBuilder.ISortBuilder;
+import com.google.gson.Gson;
 
-import java.io.IOException;
-import java.io.Reader;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Comparator;
 import java.util.List;
+import java.util.regex.Pattern;
 
  public class CensusAnalyser {
     List censusCSVList=null;
     List stateCSVList;
 
-    public int loadIndiaCensusData(String csvFilePath,Class type, char seperator)  {
+    public int loadIndiaCensusData(String csvFilePath,Class type)  {
         checkType(IndiaCensusCSV.class,type);
-        checkSeperator(seperator);
+        match(csvFilePath);
         try(Reader reader = Files.newBufferedReader(Paths.get(csvFilePath));){
             ICSVBuilder builder = CSVBuilderFactory.getBuilder();
              censusCSVList = builder.getCSVFileList(reader, type);
@@ -32,9 +36,9 @@ import java.util.List;
         }
     }
 
-    public int loadIndiaStateCode(String csvFilePath,Class type,char seperator)  {
+    public int loadIndiaStateCode(String csvFilePath,Class type)  {
         checkType(IndiaStateCode.class,type);
-        checkSeperator(seperator);
+        match(csvFilePath);
         try(Reader reader = Files.newBufferedReader(Paths.get(csvFilePath));) {
             ICSVBuilder builder = CSVBuilderFactory.getBuilder();
             stateCSVList = builder.getCSVFileList(reader,type);
@@ -46,10 +50,15 @@ import java.util.List;
         }
     }
 
-    public void checkSeperator(char seperator) {
-        if(seperator!=',')
-            throw new CensusAnalyserException("Invalid seperator", CensusAnalyserException.ExceptionType.INVALID_SEPERATOR);
-    }
+     private void match(String path) {
+         try {
+             String firstLine = new BufferedReader(new FileReader(path)).readLine();
+             if(!Pattern.matches("^([a-zA-Z0-9]([ ][a-zA-Z0-9]+)?([,][a-zA-Z0-9]+)?)+$",firstLine))
+                 throw new CensusAnalyserException("Invalid seperator", CensusAnalyserException.ExceptionType.INVALID_SEPERATOR);
+         } catch (IOException e) {
+             e.printStackTrace();
+         }
+     }
 
     public void checkType(Class requiredType, Class providedType ){
         if(requiredType.equals(providedType)==false){
@@ -63,23 +72,53 @@ import java.util.List;
 //        return numOfEnteries;
 //    }
 
-    String sortStateNameWise(){
-        Comparator<IndiaCensusCSV> comparator = Comparator.comparing(censusCSV->censusCSV.state);
-        ISortBuilder iSortBuilder = CSVBuilderFactory.getSortBuilder();
-        return iSortBuilder.sortData(comparator,censusCSVList);
+    String sortStateParameterWise(String sortBy){
+        Comparator<IndiaCensusCSV> comparator;
+        switch (sortBy.toLowerCase()){
+            case "state":
+                comparator = Comparator.comparing(censusCSV->censusCSV.state);
+                break;
+            case "population":
+                comparator = Comparator.comparing(censusCSV -> censusCSV.population);
+                break;
+            case "area":
+                comparator = Comparator.comparing(censusCSV -> censusCSV.areaInSqKm);
+                break;
+//            case "density":
+//                comparator = Comparator.comparing(censusCSV -> censusCSV.densityPerSqKm);
+//                break;
+            default:
+                return "Invalid choice";
+        }
+        return sortedData(comparator,censusCSVList);
     }
 
-     String sortStatePopulationWise(){
-         Comparator<IndiaCensusCSV> comparator = Comparator.comparing(censusCSV->censusCSV.population);
-         ISortBuilder iSortBuilder = CSVBuilderFactory.getSortBuilder();
-         return iSortBuilder.sortData(comparator,censusCSVList);
+
+     String sortStateCodeDate(){
+         Comparator<IndiaStateCode> comparator = Comparator.comparing(indiaStateCode -> indiaStateCode.code);
+         return sortedData(comparator,stateCSVList);
      }
 
-    String sortStateCodeDate(){
-        Comparator<IndiaStateCode> comparator = Comparator.comparing(indiaStateCode -> indiaStateCode.code);
-        ISortBuilder iSortBuilder = CSVBuilderFactory.getSortBuilder();
-        return iSortBuilder.sortData(comparator, stateCSVList);
-    }
+     private String sortedData(Comparator comparator, List CSVList) {
+         ISortBuilder iSortBuilder = CSVBuilderFactory.getSortBuilder();
+         return iSortBuilder.sortData(comparator,CSVList);
+     }
+
+     void writeStatePopulation_InJSONFormat_IntoAFile(String filePath, String sortBy)  {
+        File fs = new File(filePath);
+         try {
+             if(fs.exists()==false){
+                 //throw new CSVBuilderException("No such file", CSVBuilderException.ExceptionType.FILE_NOT_FOUND_EXCEPTION);
+                 fs.createNewFile();
+             }
+             FileWriter fw = new FileWriter(fs);
+             new Gson().toJson(sortStateParameterWise(sortBy),fw);
+             fw.flush();
+             fw.close();
+         } catch (IOException e) {
+             e.printStackTrace();
+         }
+     }
 
 }
 
