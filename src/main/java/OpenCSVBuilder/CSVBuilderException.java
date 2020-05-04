@@ -4,7 +4,8 @@ public class CSVBuilderException extends RuntimeException{
     public enum ExceptionType{
         CENSUS_FILE_PROBLEM,
         UNABLE_TO_PARSE,
-        FIlE_NULL_EXCEPTION
+        FIlE_NULL_EXCEPTION,
+        FILE_NOT_FOUND_EXCEPTION
     }
 
     public ExceptionType type;
