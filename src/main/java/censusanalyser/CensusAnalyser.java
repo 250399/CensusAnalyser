@@ -10,13 +10,17 @@ import OpenCSVBuilder.ISortBuilder;
 import com.google.gson.Gson;
 
 import java.io.*;
+import java.lang.reflect.Array;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 import java.util.regex.Pattern;
 
- public class CensusAnalyser {
+public class CensusAnalyser {
+    HashMap<Class,List> hmap= new HashMap<>();
     List censusCSVList=null;
     List stateCSVList;
 
@@ -25,8 +29,8 @@ import java.util.regex.Pattern;
         match(csvFilePath);
         try(Reader reader = Files.newBufferedReader(Paths.get(csvFilePath));){
             ICSVBuilder builder = CSVBuilderFactory.getBuilder();
-             censusCSVList = builder.getCSVFileList(reader, type);
-            return censusCSVList.size();
+             hmap.put(IndiaCensusCSV.class,builder.getCSVFileList(reader,type));
+             return hmap.get(IndiaCensusCSV.class).size();
         } catch (IOException e) {
             throw new CSVBuilderException(e.getMessage(),
                     CSVBuilderException.ExceptionType.CENSUS_FILE_PROBLEM);
@@ -41,8 +45,8 @@ import java.util.regex.Pattern;
         match(csvFilePath);
         try(Reader reader = Files.newBufferedReader(Paths.get(csvFilePath));) {
             ICSVBuilder builder = CSVBuilderFactory.getBuilder();
-            stateCSVList = builder.getCSVFileList(reader,type);
-            return stateCSVList.size();
+            hmap.put(IndiaStateCode.class,builder.getCSVFileList(reader,type));
+            return hmap.get(IndiaStateCode.class).size();
         } catch (IOException e) {
             throw new CSVBuilderException(e.getMessage(), CSVBuilderException.ExceptionType.CENSUS_FILE_PROBLEM);
         }catch (RuntimeException e){
@@ -90,13 +94,14 @@ import java.util.regex.Pattern;
             default:
                 return "Invalid choice";
         }
-        return sortedData(comparator,censusCSVList);
+        ArrayList arr = new ArrayList(hmap.get(IndiaCensusCSV.class));
+        return sortedData(comparator, arr);
     }
 
 
      String sortStateCodeDate(){
          Comparator<IndiaStateCode> comparator = Comparator.comparing(indiaStateCode -> indiaStateCode.code);
-         return sortedData(comparator,stateCSVList);
+         return sortedData(comparator,hmap.get(IndiaStateCode.class));
      }
 
      private String sortedData(Comparator comparator, List CSVList) {

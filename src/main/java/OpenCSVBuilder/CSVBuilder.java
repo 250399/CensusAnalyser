@@ -17,7 +17,7 @@ public class CSVBuilder <E> implements ICSVBuilder{
         return getCsvToBean(reader ,className).parse();
     }
 
-    public CsvToBean getCsvToBean(Reader reader,Class className){
+    public CsvToBean getCsvToBean(Reader reader, Class className){
         return  (CsvToBean) new CsvToBeanBuilder<>(reader)
         .withType(className)
         .withIgnoreLeadingWhiteSpace(true)
