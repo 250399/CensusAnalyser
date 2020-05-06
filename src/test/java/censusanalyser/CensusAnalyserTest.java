@@ -3,6 +3,7 @@ package censusanalyser;
 import exceptionclass.CensusAnalyserException;
 import models.IndiaCensusCSV;
 import models.IndiaStateCode;
+import models.USCensusCSV;
 import opencsvbuilder.CSVBuilderException;
 import com.google.gson.Gson;
 import org.junit.Assert;
@@ -17,6 +18,7 @@ public class CensusAnalyserTest {
     private static final String WRONG_CSV_FILE_PATH = "./src/main/resources/IndiaStateCensusData.csv";
     private static final String INDIA_STATE_CODE_CSV_FILE_PATH = "./src/test/resources/IndiaStateCode.csv";
     private static final String JSON_OUTPUT_FILE="./src/test/resources/Census.json";
+    private static final String US_CENSUS_CSV_FILE_PATH = "./src/test/resources/USCensusData.csv";
     CensusAnalyser censusAnalyser ;
 
     @Before
@@ -200,6 +202,15 @@ public class CensusAnalyserTest {
         }
     }
 
+    @Test
+    public void givenUSCensusCSVFile_ReturnsCorrectRecords() {
+        try {
+            int numOfRecords = censusAnalyser.loadUSCensusData(US_CENSUS_CSV_FILE_PATH, USCensusCSV.class);
+            Assert.assertEquals(51,numOfRecords);
+        } catch (CensusAnalyserException e) {
+            Assert.assertEquals("",e.getMessage());
+        }
+    }
 
 
 }
