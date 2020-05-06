@@ -1,5 +1,6 @@
  package censusanalyser;
 
+import dao.IndiaStateDAO;
 import exceptionclass.CensusAnalyserException;
 import models.IndiaCensusCSV;
 import models.IndiaCensusDAO;
@@ -28,9 +29,9 @@ import java.util.stream.StreamSupport;
             ArrayList<IndiaCensusDAO> arr = new ArrayList<>();
             ICSVBuilder builder = CSVBuilderFactory.getBuilder();
             Iterator<IndiaCensusCSV> censusCSVIterator = builder.getCSVFileIterator(reader,IndiaCensusCSV.class);
-            while(censusCSVIterator.hasNext()){
-                arr.add(new IndiaCensusDAO(censusCSVIterator.next()));
-            }
+            Iterable<IndiaCensusCSV> censusIterable = ()-> censusCSVIterator;
+            StreamSupport.stream(censusIterable.spliterator(),false)
+                    .forEach(csvCensus -> arr.add(new IndiaCensusDAO(csvCensus)));
             hmap.put(getFileName(csvFilePath),arr);
             return hmap.get(getFileName(csvFilePath)).size();
         } catch (IOException e) {
@@ -47,8 +48,13 @@ import java.util.stream.StreamSupport;
             checkType(IndiaStateCode.class,type[0]);
         match(csvFilePath);
         try(Reader reader = Files.newBufferedReader(Paths.get(csvFilePath));) {
+            ArrayList<IndiaStateDAO> arr = new ArrayList<>();
             ICSVBuilder builder = CSVBuilderFactory.getBuilder();
-            hmap.put(getFileName(csvFilePath),builder.getCSVFileList(reader,IndiaStateCode.class));
+            Iterator<IndiaStateCode> censusCSVIterator = builder.getCSVFileIterator(reader,IndiaStateCode.class);
+            Iterable<IndiaStateCode> censusIterable = ()-> censusCSVIterator;
+            StreamSupport.stream(censusIterable.spliterator(),false)
+                    .forEach(csvCensus -> arr.add(new IndiaStateDAO(csvCensus)));
+            hmap.put(getFileName(csvFilePath),arr);
             return hmap.get(getFileName(csvFilePath)).size();
         } catch (IOException e) {
             throw new CSVBuilderException(e.getMessage(), CSVBuilderException.ExceptionType.CENSUS_FILE_PROBLEM);
