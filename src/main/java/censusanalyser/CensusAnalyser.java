@@ -1,10 +1,12 @@
  package censusanalyser;
 
 import dao.IndiaStateDAO;
+import dao.USCensusDAO;
 import exceptionclass.CensusAnalyserException;
 import models.IndiaCensusCSV;
 import models.IndiaCensusDAO;
 import models.IndiaStateCode;
+import models.USCensusCSV;
 import opencsvbuilder.CSVBuilderException;
 import opencsvbuilder.CSVBuilderFactory;
 import opencsvbuilder.ICSVBuilder;
@@ -18,7 +20,7 @@ import java.util.*;
 import java.util.regex.Pattern;
 import java.util.stream.StreamSupport;
 
- public class CensusAnalyser {
+public class CensusAnalyser {
     HashMap<String,List> hmap= new HashMap<>();
 
     public int loadIndiaCensusData(String csvFilePath,Class ...type)  {
@@ -32,6 +34,28 @@ import java.util.stream.StreamSupport;
             Iterable<IndiaCensusCSV> censusIterable = ()-> censusCSVIterator;
             StreamSupport.stream(censusIterable.spliterator(),false)
                     .forEach(csvCensus -> arr.add(new IndiaCensusDAO(csvCensus)));
+            hmap.put(getFileName(csvFilePath),arr);
+            return hmap.get(getFileName(csvFilePath)).size();
+        } catch (IOException e) {
+            throw new CSVBuilderException(e.getMessage(),
+                    CSVBuilderException.ExceptionType.CENSUS_FILE_PROBLEM);
+        }catch (RuntimeException e){
+            throw new CensusAnalyserException("Invalid Header",
+                    CensusAnalyserException.ExceptionType.INVALID_HEADER);
+        }
+    }
+
+    public int loadUSCensusData(String csvFilePath,Class ...type)  {
+        if (type.length!=0)
+            checkType(USCensusCSV.class,type[0]);
+        match(csvFilePath);
+        try(Reader reader = Files.newBufferedReader(Paths.get(csvFilePath));){
+            ArrayList<USCensusDAO> arr = new ArrayList<>();
+            ICSVBuilder builder = CSVBuilderFactory.getBuilder();
+            Iterator<USCensusCSV> censusCSVIterator = builder.getCSVFileIterator(reader,USCensusCSV.class);
+            Iterable<USCensusCSV> censusIterable = ()-> censusCSVIterator;
+            StreamSupport.stream(censusIterable.spliterator(),false)
+                    .forEach(csvCensus -> arr.add(new USCensusDAO(csvCensus)));
             hmap.put(getFileName(csvFilePath),arr);
             return hmap.get(getFileName(csvFilePath)).size();
         } catch (IOException e) {
