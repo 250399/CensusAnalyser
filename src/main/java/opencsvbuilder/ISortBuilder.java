@@ -1,4 +1,4 @@
-package OpenCSVBuilder;
+package opencsvbuilder;
 
 import java.util.Comparator;
 import java.util.List;

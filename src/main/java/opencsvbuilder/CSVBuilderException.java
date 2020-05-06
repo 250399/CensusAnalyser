@@ -1,4 +1,4 @@
-package OpenCSVBuilder;
+package opencsvbuilder;
 
 public class CSVBuilderException extends RuntimeException{
     public enum ExceptionType{

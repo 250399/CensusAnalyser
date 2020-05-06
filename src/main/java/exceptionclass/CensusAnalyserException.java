@@ -1,4 +1,4 @@
-package ExceptionClass;
+package exceptionclass;
 
 public class CensusAnalyserException extends RuntimeException {
 
