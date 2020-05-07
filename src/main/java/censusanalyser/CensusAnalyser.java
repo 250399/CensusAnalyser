@@ -74,7 +74,7 @@ public class CensusAnalyser {
             throw new CensusAnalyserException("Invalid type", CensusAnalyserException.ExceptionType.INVALID_TYPE);
     }
 
-    String sortGivenFileParameterWise(String csvFileName, String sortBy){
+    String sortGivenFileParameterWise(String csvFileName, String sortBy,String ...additionalCsvFileName){
         Comparator comparator = Comparator.comparing(censusCSV->{
             try {
                 return(Comparable) censusCSV.getClass().getDeclaredField(sortBy).get(censusCSV);
@@ -83,8 +83,12 @@ public class CensusAnalyser {
             }
         });
         try {
-//            ArrayList a1 = new ArrayList(Collections.singleton(hmap.get(csvClass).getClass().getDeclaredField(sortBy)));
-            ArrayList arr = new ArrayList(hmap.get(csvFileName));
+//            ArrayList a1 = new ArrayList(Collections.singleton(hmap.get(csvClass)
+//            .getClass()
+//            .getDeclaredField(sortBy)));
+            ArrayList<Object> arr = new ArrayList(hmap.get(csvFileName));
+            for(String s : additionalCsvFileName)
+                arr.addAll(hmap.get(s));
             return sortedData(comparator, arr);
         }catch (NullPointerException e){
             throw new CSVBuilderException("No such file", CSVBuilderException.ExceptionType.FILE_NOT_FOUND_EXCEPTION);
@@ -110,6 +114,7 @@ public class CensusAnalyser {
              e.printStackTrace();
          }
      }
+
 
 }
 
