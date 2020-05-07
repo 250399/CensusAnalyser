@@ -222,5 +222,12 @@ public class CensusAnalyserTest {
         Assert.assertEquals(37253956,indiaCensusCSVS[0].population);
     }
 
+    @Test
+    public void getSorted_ForUSCensus_InJSONFormat_EndState(){
+        censusAnalyser.loadCensusData(US_CENSUS_CSV_FILE_PATH,USCensusCSV.class);
+        String sortedList = censusAnalyser.sortGivenFileParameterWise("USCensusData","population");
+        IndiaCensusCSV[] indiaCensusCSVS = new Gson().fromJson(sortedList,IndiaCensusCSV[].class);
+        Assert.assertEquals(563626,indiaCensusCSVS[indiaCensusCSVS.length-1].population);
+    }
 
 }
