@@ -13,16 +13,18 @@ public class CSVBuilder <E> implements ICSVBuilder{
         return getCsvToBean(reader,className).iterator();
     }
 
-    @Override
-    public List getCSVFileList(Reader reader, Class className) {
-        return getCsvToBean(reader ,className).parse();
-    }
 
     public CsvToBean getCsvToBean(Reader reader, Class className){
-        return  (CsvToBean) new CsvToBeanBuilder<>(reader)
-        .withType(className)
-        .withIgnoreLeadingWhiteSpace(true)
-        .withSeparator(',')
-        .build();
+        try {
+            return  (CsvToBean) new CsvToBeanBuilder<>(reader)
+                    .withType(className)
+                    .withIgnoreLeadingWhiteSpace(true)
+                    .withSeparator(',')
+                    .build();
+        }catch (Exception e){
+            new CSVBuilderException("Invalid type",CSVBuilderException.ExceptionType.TYPE_EXCEPTION);
+        }
+
+        return null;
     }
 }

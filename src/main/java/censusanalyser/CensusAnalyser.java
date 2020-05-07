@@ -4,7 +4,7 @@ import dao.IndiaStateDAO;
 import dao.USCensusDAO;
 import exceptionclass.CensusAnalyserException;
 import models.IndiaCensusCSV;
-import models.IndiaCensusDAO;
+import dao.IndiaCensusDAO;
 import models.IndiaStateCode;
 import models.USCensusCSV;
 import opencsvbuilder.CSVBuilderException;
@@ -13,6 +13,7 @@ import opencsvbuilder.ICSVBuilder;
 import opencsvbuilder.ISortBuilder;
 import com.google.gson.Gson;
 
+import javax.swing.plaf.nimbus.State;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -23,17 +24,23 @@ import java.util.stream.StreamSupport;
 public class CensusAnalyser {
     HashMap<String,List> hmap= new HashMap<>();
 
-    public int loadIndiaCensusData(String csvFilePath,Class ...type)  {
-        if (type.length!=0)
-            checkType(IndiaCensusCSV.class,type[0]);
+    public <E> int loadCensusData(String csvFilePath,Class type)  {
+        checkType(type);
         match(csvFilePath);
         try(Reader reader = Files.newBufferedReader(Paths.get(csvFilePath));){
-            ArrayList<IndiaCensusDAO> arr = new ArrayList<>();
+            ArrayList<Object> arr = new ArrayList<>();
             ICSVBuilder builder = CSVBuilderFactory.getBuilder();
-            Iterator<IndiaCensusCSV> censusCSVIterator = builder.getCSVFileIterator(reader,IndiaCensusCSV.class);
-            Iterable<IndiaCensusCSV> censusIterable = ()-> censusCSVIterator;
+            Iterator<E> censusCSVIterator = builder.getCSVFileIterator(reader,type);
+            Iterable<E> censusIterable = ()-> censusCSVIterator;
             StreamSupport.stream(censusIterable.spliterator(),false)
-                    .forEach(csvCensus -> arr.add(new IndiaCensusDAO(csvCensus)));
+                    .forEach(csvCensus -> {
+                        if(type.equals(IndiaCensusCSV.class))
+                            arr.add(new IndiaCensusDAO((IndiaCensusCSV) csvCensus));
+                        else if(type.equals(USCensusCSV.class))
+                            arr.add(new USCensusDAO((USCensusCSV) csvCensus));
+                        else if(type.equals(IndiaStateCode.class))
+                            arr.add(new IndiaStateDAO((IndiaStateCode) csvCensus));
+                    });
             hmap.put(getFileName(csvFilePath),arr);
             return hmap.get(getFileName(csvFilePath)).size();
         } catch (IOException e) {
@@ -42,48 +49,6 @@ public class CensusAnalyser {
         }catch (RuntimeException e){
             throw new CensusAnalyserException("Invalid Header",
                     CensusAnalyserException.ExceptionType.INVALID_HEADER);
-        }
-    }
-
-    public int loadUSCensusData(String csvFilePath,Class ...type)  {
-        if (type.length!=0)
-            checkType(USCensusCSV.class,type[0]);
-        match(csvFilePath);
-        try(Reader reader = Files.newBufferedReader(Paths.get(csvFilePath));){
-            ArrayList<USCensusDAO> arr = new ArrayList<>();
-            ICSVBuilder builder = CSVBuilderFactory.getBuilder();
-            Iterator<USCensusCSV> censusCSVIterator = builder.getCSVFileIterator(reader,USCensusCSV.class);
-            Iterable<USCensusCSV> censusIterable = ()-> censusCSVIterator;
-            StreamSupport.stream(censusIterable.spliterator(),false)
-                    .forEach(csvCensus -> arr.add(new USCensusDAO(csvCensus)));
-            hmap.put(getFileName(csvFilePath),arr);
-            return hmap.get(getFileName(csvFilePath)).size();
-        } catch (IOException e) {
-            throw new CSVBuilderException(e.getMessage(),
-                    CSVBuilderException.ExceptionType.CENSUS_FILE_PROBLEM);
-        }catch (RuntimeException e){
-            throw new CensusAnalyserException("Invalid Header",
-                    CensusAnalyserException.ExceptionType.INVALID_HEADER);
-        }
-    }
-
-    public int loadIndiaStateCode(String csvFilePath,Class ...type)  {
-        if(type.length!=0)
-            checkType(IndiaStateCode.class,type[0]);
-        match(csvFilePath);
-        try(Reader reader = Files.newBufferedReader(Paths.get(csvFilePath));) {
-            ArrayList<IndiaStateDAO> arr = new ArrayList<>();
-            ICSVBuilder builder = CSVBuilderFactory.getBuilder();
-            Iterator<IndiaStateCode> censusCSVIterator = builder.getCSVFileIterator(reader,IndiaStateCode.class);
-            Iterable<IndiaStateCode> censusIterable = ()-> censusCSVIterator;
-            StreamSupport.stream(censusIterable.spliterator(),false)
-                    .forEach(csvCensus -> arr.add(new IndiaStateDAO(csvCensus)));
-            hmap.put(getFileName(csvFilePath),arr);
-            return hmap.get(getFileName(csvFilePath)).size();
-        } catch (IOException e) {
-            throw new CSVBuilderException(e.getMessage(), CSVBuilderException.ExceptionType.CENSUS_FILE_PROBLEM);
-        }catch (RuntimeException e){
-            throw new CensusAnalyserException("Invalid Header",CensusAnalyserException.ExceptionType.INVALID_HEADER);
         }
     }
 
@@ -102,10 +67,11 @@ public class CensusAnalyser {
          }
      }
 
-    public void checkType(Class requiredType, Class providedType ){
-        if(requiredType.equals(providedType)==false){
-            throw new CensusAnalyserException("Invalid type",CensusAnalyserException.ExceptionType.INVALID_TYPE);
-        }
+    public void checkType(Class providedType ){
+        if(providedType.equals(IndiaStateCode.class)==false&&
+        providedType.equals(IndiaCensusCSV.class)==false&&
+        providedType.equals(USCensusCSV.class)==false)
+            throw new CensusAnalyserException("Invalid type", CensusAnalyserException.ExceptionType.INVALID_TYPE);
     }
 
     String sortGivenFileParameterWise(String csvFileName, String sortBy){
@@ -119,6 +85,7 @@ public class CensusAnalyser {
             return null;
         });
         try {
+//            ArrayList a1 = new ArrayList(Collections.singleton(hmap.get(csvFileName).getClass().getDeclaredField(sortBy)));
             ArrayList arr = new ArrayList(hmap.get(csvFileName));
             return sortedData(comparator, arr);
         }catch (Exception e){

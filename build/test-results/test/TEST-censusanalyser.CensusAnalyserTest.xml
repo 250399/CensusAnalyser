@@ -1,7 +1,142 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="censusanalyser.CensusAnalyserTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2020-05-06T05:40:11" hostname="DESKTOP-196HMRI" time="0.314">
+<testsuite name="censusanalyser.CensusAnalyserTest" tests="22" skipped="0" failures="0" errors="0" timestamp="2020-05-07T05:26:41" hostname="DESKTOP-196HMRI" time="1.55">
   <properties/>
-  <testcase name="givenUSCensusCSVFile_ReturnsCorrectRecords" classname="censusanalyser.CensusAnalyserTest" time="0.314"/>
+  <testcase name="givenIndiaStateCodeData_WithWrongFile_ShouldThrowException" classname="censusanalyser.CensusAnalyserTest" time="0.026"/>
+  <testcase name="givenIndianCensusCSVFileReturnsCorrectRecords" classname="censusanalyser.CensusAnalyserTest" time="0.28"/>
+  <testcase name="givenFileName_WhenImproper_ThrowsException" classname="censusanalyser.CensusAnalyserTest" time="0.144"/>
+  <testcase name="getSorted_StateCode_InJSONFormat_EndState" classname="censusanalyser.CensusAnalyserTest" time="0.201"/>
+  <testcase name="getSorted_StatePopulation_InJSONFormat_StartState" classname="censusanalyser.CensusAnalyserTest" time="0.052"/>
+  <testcase name="givenIndiaStateCodeData_WhenTypeIncorrect_ThrowsException" classname="censusanalyser.CensusAnalyserTest" time="0.354"/>
+  <testcase name="getSorted_StateCode_InJSONFormat_StartState" classname="censusanalyser.CensusAnalyserTest" time="0.021"/>
+  <testcase name="getSorted_ForUSCensus_InJSONFormat_StartState" classname="censusanalyser.CensusAnalyserTest" time="0.098"/>
+  <testcase name="givenIndiaCensusData_WhenHeaderNotCorrect_ThrowsException" classname="censusanalyser.CensusAnalyserTest" time="0.023"/>
+  <testcase name="givenIndiaStateCodeCSVFileReturnsCorrectRecords" classname="censusanalyser.CensusAnalyserTest" time="0.021"/>
+  <testcase name="givenUSCensusCSVFile_ReturnsCorrectRecords" classname="censusanalyser.CensusAnalyserTest" time="0.045"/>
+  <testcase name="whenFilePathIsProper_writeIntoJsonFile_SortedByArea" classname="censusanalyser.CensusAnalyserTest" time="0.03"/>
+  <testcase name="givenIndiaStateCodeData_WhenHeaderNotCorrect_ThrowsException" classname="censusanalyser.CensusAnalyserTest" time="0.003"/>
+  <testcase name="getSorted_StatePopulation_InJSONFormat_EndState" classname="censusanalyser.CensusAnalyserTest" time="0.037"/>
+  <testcase name="givenIndiaStateCodeData_WhenSeperator_ThrowsException" classname="censusanalyser.CensusAnalyserTest" time="0.024"/>
+  <testcase name="getSorted_StateName_InJsonFormat_EndState" classname="censusanalyser.CensusAnalyserTest" time="0.039"/>
+  <testcase name="givenIndiaCensusData_WithWrongFile_ShouldThrowException" classname="censusanalyser.CensusAnalyserTest" time="0.007"/>
+  <testcase name="whenFilePathIsProper_writeIntoJsonFile_SortedDensity" classname="censusanalyser.CensusAnalyserTest" time="0.042"/>
+  <testcase name="getSorted_StateName_InJsonFormat_StartState" classname="censusanalyser.CensusAnalyserTest" time="0.036"/>
+  <testcase name="givenIndiaCensusData_WhenTypeIncorrect_ThrowsException" classname="censusanalyser.CensusAnalyserTest" time="0.0"/>
+  <testcase name="givenIndiaCensusData_WhenSeperator_ThrowsException" classname="censusanalyser.CensusAnalyserTest" time="0.028"/>
+  <testcase name="whenFilePath_IsImproper_ThrowException" classname="censusanalyser.CensusAnalyserTest" time="0.028"/>
   <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
+  <system-err><![CDATA[java.io.FileNotFoundException: .\src\main\resources\IndiaStateCensusData.csv (The system cannot find the file specified)
+	at java.base/java.io.FileInputStream.open0(Native Method)
+	at java.base/java.io.FileInputStream.open(FileInputStream.java:213)
+	at java.base/java.io.FileInputStream.<init>(FileInputStream.java:155)
+	at java.base/java.io.FileInputStream.<init>(FileInputStream.java:110)
+	at java.base/java.io.FileReader.<init>(FileReader.java:60)
+	at censusanalyser.CensusAnalyser.match(CensusAnalyser.java:62)
+	at censusanalyser.CensusAnalyser.loadCensusData(CensusAnalyser.java:29)
+	at censusanalyser.CensusAnalyserTest.givenIndiaStateCodeData_WithWrongFile_ShouldThrowException(CensusAnalyserTest.java:91)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:567)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.runTestClass(JUnitTestClassExecutor.java:110)
+	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.execute(JUnitTestClassExecutor.java:58)
+	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.execute(JUnitTestClassExecutor.java:38)
+	at org.gradle.api.internal.tasks.testing.junit.AbstractJUnitTestClassProcessor.processTestClass(AbstractJUnitTestClassProcessor.java:62)
+	at org.gradle.api.internal.tasks.testing.SuiteTestClassProcessor.processTestClass(SuiteTestClassProcessor.java:51)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:567)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:36)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24)
+	at org.gradle.internal.dispatch.ContextClassLoaderDispatch.dispatch(ContextClassLoaderDispatch.java:33)
+	at org.gradle.internal.dispatch.ProxyDispatchAdapter$DispatchingInvocationHandler.invoke(ProxyDispatchAdapter.java:94)
+	at com.sun.proxy.$Proxy2.processTestClass(Unknown Source)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.processTestClass(TestWorker.java:118)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:567)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:36)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24)
+	at org.gradle.internal.remote.internal.hub.MessageHubBackedObjectConnection$DispatchWrapper.dispatch(MessageHubBackedObjectConnection.java:182)
+	at org.gradle.internal.remote.internal.hub.MessageHubBackedObjectConnection$DispatchWrapper.dispatch(MessageHubBackedObjectConnection.java:164)
+	at org.gradle.internal.remote.internal.hub.MessageHub$Handler.run(MessageHub.java:412)
+	at org.gradle.internal.concurrent.ExecutorPolicy$CatchAndRecordFailures.onExecute(ExecutorPolicy.java:64)
+	at org.gradle.internal.concurrent.ManagedExecutorImpl$1.run(ManagedExecutorImpl.java:48)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at org.gradle.internal.concurrent.ThreadFactoryImpl$ManagedThreadRunnable.run(ThreadFactoryImpl.java:56)
+	at java.base/java.lang.Thread.run(Thread.java:835)
+java.io.FileNotFoundException: .\src\main\resources\IndiaStateCensusData.csv (The system cannot find the file specified)
+	at java.base/java.io.FileInputStream.open0(Native Method)
+	at java.base/java.io.FileInputStream.open(FileInputStream.java:213)
+	at java.base/java.io.FileInputStream.<init>(FileInputStream.java:155)
+	at java.base/java.io.FileInputStream.<init>(FileInputStream.java:110)
+	at java.base/java.io.FileReader.<init>(FileReader.java:60)
+	at censusanalyser.CensusAnalyser.match(CensusAnalyser.java:62)
+	at censusanalyser.CensusAnalyser.loadCensusData(CensusAnalyser.java:29)
+	at censusanalyser.CensusAnalyserTest.givenIndiaCensusData_WithWrongFile_ShouldThrowException(CensusAnalyserTest.java:44)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:567)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.runTestClass(JUnitTestClassExecutor.java:110)
+	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.execute(JUnitTestClassExecutor.java:58)
+	at org.gradle.api.internal.tasks.testing.junit.JUnitTestClassExecutor.execute(JUnitTestClassExecutor.java:38)
+	at org.gradle.api.internal.tasks.testing.junit.AbstractJUnitTestClassProcessor.processTestClass(AbstractJUnitTestClassProcessor.java:62)
+	at org.gradle.api.internal.tasks.testing.SuiteTestClassProcessor.processTestClass(SuiteTestClassProcessor.java:51)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:567)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:36)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24)
+	at org.gradle.internal.dispatch.ContextClassLoaderDispatch.dispatch(ContextClassLoaderDispatch.java:33)
+	at org.gradle.internal.dispatch.ProxyDispatchAdapter$DispatchingInvocationHandler.invoke(ProxyDispatchAdapter.java:94)
+	at com.sun.proxy.$Proxy2.processTestClass(Unknown Source)
+	at org.gradle.api.internal.tasks.testing.worker.TestWorker.processTestClass(TestWorker.java:118)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:567)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:36)
+	at org.gradle.internal.dispatch.ReflectionDispatch.dispatch(ReflectionDispatch.java:24)
+	at org.gradle.internal.remote.internal.hub.MessageHubBackedObjectConnection$DispatchWrapper.dispatch(MessageHubBackedObjectConnection.java:182)
+	at org.gradle.internal.remote.internal.hub.MessageHubBackedObjectConnection$DispatchWrapper.dispatch(MessageHubBackedObjectConnection.java:164)
+	at org.gradle.internal.remote.internal.hub.MessageHub$Handler.run(MessageHub.java:412)
+	at org.gradle.internal.concurrent.ExecutorPolicy$CatchAndRecordFailures.onExecute(ExecutorPolicy.java:64)
+	at org.gradle.internal.concurrent.ManagedExecutorImpl$1.run(ManagedExecutorImpl.java:48)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1128)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:628)
+	at org.gradle.internal.concurrent.ThreadFactoryImpl$ManagedThreadRunnable.run(ThreadFactoryImpl.java:56)
+	at java.base/java.lang.Thread.run(Thread.java:835)
+]]></system-err>
 </testsuite>

@@ -7,6 +7,7 @@ import java.util.List;
 
 public class SortBuilderCSVData implements ISortBuilder {
 
+
     public String sortData(Comparator comparator, List CSVList){
         if(CSVList ==null|| CSVList.size()==0)
             throw new CSVBuilderException("Null census file",CSVBuilderException.ExceptionType.FIlE_NULL_EXCEPTION);

@@ -6,5 +6,4 @@ import java.util.List;
 
 public interface ICSVBuilder<E> {
     public Iterator<E> getCSVFileIterator(Reader reader, Class className);
-    public List getCSVFileList(Reader reader, Class className);
 }

@@ -1,4 +1,6 @@
-package models;
+package dao;
+
+import models.IndiaCensusCSV;
 
 public class IndiaCensusDAO {
     public String state;
