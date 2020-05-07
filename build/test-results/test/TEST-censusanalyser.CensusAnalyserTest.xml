@@ -1,34 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="censusanalyser.CensusAnalyserTest" tests="28" skipped="0" failures="0" errors="0" timestamp="2020-05-07T07:19:18" hostname="DESKTOP-196HMRI" time="4.22">
+<testsuite name="censusanalyser.CensusAnalyserTest" tests="30" skipped="0" failures="0" errors="0" timestamp="2020-05-07T08:12:29" hostname="DESKTOP-196HMRI" time="1.698">
   <properties/>
-  <testcase name="givenIndiaStateCodeData_WithWrongFile_ShouldThrowException" classname="censusanalyser.CensusAnalyserTest" time="0.25"/>
-  <testcase name="givenInvalidField_ForUSCensus_ToSortThrowsException" classname="censusanalyser.CensusAnalyserTest" time="1.049"/>
-  <testcase name="getSortedArea_ForUSCensus_InJSONFormat_StartState" classname="censusanalyser.CensusAnalyserTest" time="0.47"/>
-  <testcase name="givenIndianCensusCSVFileReturnsCorrectRecords" classname="censusanalyser.CensusAnalyserTest" time="0.131"/>
-  <testcase name="givenFileName_WhenImproper_ThrowsException" classname="censusanalyser.CensusAnalyserTest" time="0.121"/>
-  <testcase name="getSorted_StateCode_InJSONFormat_EndState" classname="censusanalyser.CensusAnalyserTest" time="0.207"/>
-  <testcase name="getSorted_StatePopulation_InJSONFormat_StartState" classname="censusanalyser.CensusAnalyserTest" time="0.122"/>
-  <testcase name="getSortedPopulation_ForUSCensus_InJSONFormat_StartState" classname="censusanalyser.CensusAnalyserTest" time="0.223"/>
-  <testcase name="givenIndiaStateCodeData_WhenTypeIncorrect_ThrowsException" classname="censusanalyser.CensusAnalyserTest" time="0.0"/>
-  <testcase name="getSortedDensity_ForUSCensus_InJSONFormat_StartState" classname="censusanalyser.CensusAnalyserTest" time="0.207"/>
-  <testcase name="getSorted_StateCode_InJSONFormat_StartState" classname="censusanalyser.CensusAnalyserTest" time="0.059"/>
-  <testcase name="givenIndiaCensusData_WhenHeaderNotCorrect_ThrowsException" classname="censusanalyser.CensusAnalyserTest" time="0.063"/>
-  <testcase name="givenIndiaStateCodeCSVFileReturnsCorrectRecords" classname="censusanalyser.CensusAnalyserTest" time="0.07"/>
-  <testcase name="givenUSCensusCSVFile_ReturnsCorrectRecords" classname="censusanalyser.CensusAnalyserTest" time="0.146"/>
-  <testcase name="getSortedArea_ForUSCensus_InJSONFormat_EndState" classname="censusanalyser.CensusAnalyserTest" time="0.158"/>
-  <testcase name="whenFilePathIsProper_writeIntoJsonFile_SortedByArea" classname="censusanalyser.CensusAnalyserTest" time="0.08"/>
-  <testcase name="givenIndiaStateCodeData_WhenHeaderNotCorrect_ThrowsException" classname="censusanalyser.CensusAnalyserTest" time="0.006"/>
-  <testcase name="getSorted_StatePopulation_InJSONFormat_EndState" classname="censusanalyser.CensusAnalyserTest" time="0.069"/>
-  <testcase name="givenIndiaStateCodeData_WhenSeperator_ThrowsException" classname="censusanalyser.CensusAnalyserTest" time="0.049"/>
-  <testcase name="getSortedDensity_ForUSCensus_InJSONFormat_EndState" classname="censusanalyser.CensusAnalyserTest" time="0.135"/>
-  <testcase name="getSorted_StateName_InJsonFormat_EndState" classname="censusanalyser.CensusAnalyserTest" time="0.063"/>
-  <testcase name="givenIndiaCensusData_WithWrongFile_ShouldThrowException" classname="censusanalyser.CensusAnalyserTest" time="0.072"/>
-  <testcase name="whenFilePathIsProper_writeIntoJsonFile_SortedDensity" classname="censusanalyser.CensusAnalyserTest" time="0.104"/>
-  <testcase name="getSorted_StateName_InJsonFormat_StartState" classname="censusanalyser.CensusAnalyserTest" time="0.087"/>
-  <testcase name="givenIndiaCensusData_WhenTypeIncorrect_ThrowsException" classname="censusanalyser.CensusAnalyserTest" time="0.001"/>
-  <testcase name="givenIndiaCensusData_WhenSeperator_ThrowsException" classname="censusanalyser.CensusAnalyserTest" time="0.053"/>
-  <testcase name="whenFilePath_IsImproper_ThrowException" classname="censusanalyser.CensusAnalyserTest" time="0.077"/>
-  <testcase name="getSortedPopulation_ForUSCensus_InJSONFormat_EndState" classname="censusanalyser.CensusAnalyserTest" time="0.091"/>
+  <testcase name="givenIndiaStateCodeData_WithWrongFile_ShouldThrowException" classname="censusanalyser.CensusAnalyserTest" time="0.029"/>
+  <testcase name="givenInvalidField_ForUSCensus_ToSortThrowsException" classname="censusanalyser.CensusAnalyserTest" time="0.352"/>
+  <testcase name="getSortedArea_ForUSCensus_InJSONFormat_StartState" classname="censusanalyser.CensusAnalyserTest" time="0.187"/>
+  <testcase name="givenIndianCensusCSVFileReturnsCorrectRecords" classname="censusanalyser.CensusAnalyserTest" time="0.044"/>
+  <testcase name="givenFileName_WhenImproper_ThrowsException" classname="censusanalyser.CensusAnalyserTest" time="0.025"/>
+  <testcase name="getSorted_StateCode_InJSONFormat_EndState" classname="censusanalyser.CensusAnalyserTest" time="0.022"/>
+  <testcase name="getSorted_StatePopulation_InJSONFormat_StartState" classname="censusanalyser.CensusAnalyserTest" time="0.029"/>
+  <testcase name="getSortedDensity_ForUSCensusAndIndia_InJSONFormat_StartState" classname="censusanalyser.CensusAnalyserTest" time="0.08"/>
+  <testcase name="getSortedPopulation_ForUSCensus_InJSONFormat_StartState" classname="censusanalyser.CensusAnalyserTest" time="0.056"/>
+  <testcase name="givenIndiaStateCodeData_WhenTypeIncorrect_ThrowsException" classname="censusanalyser.CensusAnalyserTest" time="0.002"/>
+  <testcase name="getSortedDensity_ForUSCensus_InJSONFormat_StartState" classname="censusanalyser.CensusAnalyserTest" time="0.139"/>
+  <testcase name="getSorted_StateCode_InJSONFormat_StartState" classname="censusanalyser.CensusAnalyserTest" time="0.041"/>
+  <testcase name="givenIndiaCensusData_WhenHeaderNotCorrect_ThrowsException" classname="censusanalyser.CensusAnalyserTest" time="0.024"/>
+  <testcase name="givenIndiaStateCodeCSVFileReturnsCorrectRecords" classname="censusanalyser.CensusAnalyserTest" time="0.015"/>
+  <testcase name="givenUSCensusCSVFile_ReturnsCorrectRecords" classname="censusanalyser.CensusAnalyserTest" time="0.048"/>
+  <testcase name="getSortedArea_ForUSCensus_InJSONFormat_EndState" classname="censusanalyser.CensusAnalyserTest" time="0.046"/>
+  <testcase name="whenFilePathIsProper_writeIntoJsonFile_SortedByArea" classname="censusanalyser.CensusAnalyserTest" time="0.041"/>
+  <testcase name="givenIndiaStateCodeData_WhenHeaderNotCorrect_ThrowsException" classname="censusanalyser.CensusAnalyserTest" time="0.003"/>
+  <testcase name="getSorted_StatePopulation_InJSONFormat_EndState" classname="censusanalyser.CensusAnalyserTest" time="0.024"/>
+  <testcase name="givenIndiaStateCodeData_WhenSeperator_ThrowsException" classname="censusanalyser.CensusAnalyserTest" time="0.034"/>
+  <testcase name="getSortedDensity_ForUSCensus_InJSONFormat_EndState" classname="censusanalyser.CensusAnalyserTest" time="0.06"/>
+  <testcase name="getSorted_StateName_InJsonFormat_EndState" classname="censusanalyser.CensusAnalyserTest" time="0.025"/>
+  <testcase name="givenIndiaCensusData_WithWrongFile_ShouldThrowException" classname="censusanalyser.CensusAnalyserTest" time="0.02"/>
+  <testcase name="whenFilePathIsProper_writeIntoJsonFile_SortedDensity" classname="censusanalyser.CensusAnalyserTest" time="0.043"/>
+  <testcase name="getSortedDensity_ForUSCensusAndIndia_InJSONFormat_EndState" classname="censusanalyser.CensusAnalyserTest" time="0.105"/>
+  <testcase name="getSorted_StateName_InJsonFormat_StartState" classname="censusanalyser.CensusAnalyserTest" time="0.033"/>
+  <testcase name="givenIndiaCensusData_WhenTypeIncorrect_ThrowsException" classname="censusanalyser.CensusAnalyserTest" time="0.0"/>
+  <testcase name="givenIndiaCensusData_WhenSeperator_ThrowsException" classname="censusanalyser.CensusAnalyserTest" time="0.033"/>
+  <testcase name="whenFilePath_IsImproper_ThrowException" classname="censusanalyser.CensusAnalyserTest" time="0.039"/>
+  <testcase name="getSortedPopulation_ForUSCensus_InJSONFormat_EndState" classname="censusanalyser.CensusAnalyserTest" time="0.072"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[java.io.FileNotFoundException: .\src\main\resources\IndiaStateCensusData.csv (The system cannot find the file specified)
 	at java.base/java.io.FileInputStream.open0(Native Method)
