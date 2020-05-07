@@ -85,7 +85,7 @@ public class CensusAnalyser {
             return null;
         });
         try {
-//            ArrayList a1 = new ArrayList(Collections.singleton(hmap.get(csvFileName).getClass().getDeclaredField(sortBy)));
+//            ArrayList a1 = new ArrayList(Collections.singleton(hmap.get(csvClass).getClass().getDeclaredField(sortBy)));
             ArrayList arr = new ArrayList(hmap.get(csvFileName));
             return sortedData(comparator, arr);
         }catch (Exception e){
