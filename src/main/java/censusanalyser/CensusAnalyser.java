@@ -24,7 +24,8 @@ import java.util.stream.StreamSupport;
 public class CensusAnalyser {
     HashMap<String,List> hmap= new HashMap<>();
 
-    public <E> int loadCensusData(String csvFilePath,Class type)  {
+    public <E> int loadCensusData(String csvFilePath,String className)  {
+        Class type = classLoader.valueOf(className.toUpperCase()).getKlass();
         checkType(type);
         match(csvFilePath);
         try(Reader reader = Files.newBufferedReader(Paths.get(csvFilePath));){
@@ -83,9 +84,6 @@ public class CensusAnalyser {
             }
         });
         try {
-//            ArrayList a1 = new ArrayList(Collections.singleton(hmap.get(csvClass)
-//            .getClass()
-//            .getDeclaredField(sortBy)));
             ArrayList<Object> arr = new ArrayList(hmap.get(csvFileName));
             for(String s : additionalCsvFileName)
                 arr.addAll(hmap.get(s));
