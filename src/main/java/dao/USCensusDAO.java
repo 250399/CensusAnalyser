@@ -3,6 +3,7 @@ package dao;
 import models.USCensusCSV;
 
 public class USCensusDAO {
+    public double populationDensity;
     public Double totalArea;
     public int population;
     public String state;
@@ -13,5 +14,6 @@ public class USCensusDAO {
         this.stateId=obj.stateId;
         this.state=obj.state;
         this.totalArea=obj.totalArea;
+        this.populationDensity=obj.populationDensity;
     }
 }

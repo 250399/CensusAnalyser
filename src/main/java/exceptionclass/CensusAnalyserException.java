@@ -6,7 +6,8 @@ public class CensusAnalyserException extends RuntimeException {
         INVALID_TYPE,
         INVALID_SEPERATOR,
         INVALID_HEADER,
-        CENSUS_FILE_NULL
+        CENSUS_FILE_NULL,
+        NO_SUCH_FIELD
     }
 
     ExceptionType type;

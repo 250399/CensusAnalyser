@@ -16,4 +16,7 @@ public class USCensusCSV {
     @CsvBindByName(column = "Population")
     public int population;
 
+    @CsvBindByName(column = "PopulationDensity")
+    public double populationDensity;
+
 }

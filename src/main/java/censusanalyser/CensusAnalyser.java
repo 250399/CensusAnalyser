@@ -77,18 +77,16 @@ public class CensusAnalyser {
     String sortGivenFileParameterWise(String csvFileName, String sortBy){
         Comparator comparator = Comparator.comparing(censusCSV->{
             try {
-
                 return(Comparable) censusCSV.getClass().getDeclaredField(sortBy).get(censusCSV);
             } catch (NoSuchFieldException | IllegalAccessException e) {
-                e.printStackTrace();
+                throw new CensusAnalyserException("No such column to sort", CensusAnalyserException.ExceptionType.NO_SUCH_FIELD);
             }
-            return null;
         });
         try {
 //            ArrayList a1 = new ArrayList(Collections.singleton(hmap.get(csvClass).getClass().getDeclaredField(sortBy)));
             ArrayList arr = new ArrayList(hmap.get(csvFileName));
             return sortedData(comparator, arr);
-        }catch (Exception e){
+        }catch (NullPointerException e){
             throw new CSVBuilderException("No such file", CSVBuilderException.ExceptionType.FILE_NOT_FOUND_EXCEPTION);
         }
     }

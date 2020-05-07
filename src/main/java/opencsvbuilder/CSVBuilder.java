@@ -15,16 +15,12 @@ public class CSVBuilder <E> implements ICSVBuilder{
 
 
     public CsvToBean getCsvToBean(Reader reader, Class className){
-        try {
-            return  (CsvToBean) new CsvToBeanBuilder<>(reader)
-                    .withType(className)
-                    .withIgnoreLeadingWhiteSpace(true)
-                    .withSeparator(',')
-                    .build();
-        }catch (Exception e){
-            new CSVBuilderException("Invalid type",CSVBuilderException.ExceptionType.TYPE_EXCEPTION);
-        }
+        return  (CsvToBean) new CsvToBeanBuilder<>(reader)
+                .withType(className)
+                .withIgnoreLeadingWhiteSpace(true)
+                .withSeparator(',')
+                .build();
 
-        return null;
+
     }
 }
