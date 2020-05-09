@@ -1,19 +1,18 @@
  package censusanalyser;
 
-import dao.IndiaStateDAO;
-import dao.USCensusDAO;
-import exceptionclass.CensusAnalyserException;
-import models.IndiaCensusCSV;
-import dao.IndiaCensusDAO;
-import models.IndiaStateCode;
-import models.USCensusCSV;
+import censusanalyser.dao.IndiaStateDAO;
+import censusanalyser.dao.USCensusDAO;
+import censusanalyser.exceptionclass.CensusAnalyserException;
+import censusanalyser.models.IndiaCensusCSV;
+import censusanalyser.dao.IndiaCensusDAO;
+import censusanalyser.models.IndiaStateCode;
+import censusanalyser.models.USCensusCSV;
 import opencsvbuilder.CSVBuilderException;
 import opencsvbuilder.CSVBuilderFactory;
 import opencsvbuilder.ICSVBuilder;
 import opencsvbuilder.ISortBuilder;
 import com.google.gson.Gson;
 
-import javax.swing.plaf.nimbus.State;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;

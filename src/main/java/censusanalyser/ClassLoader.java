@@ -1,8 +1,8 @@
 package censusanalyser;
 
-import models.IndiaCensusCSV;
-import models.IndiaStateCode;
-import models.USCensusCSV;
+import censusanalyser.models.IndiaCensusCSV;
+import censusanalyser.models.IndiaStateCode;
+import censusanalyser.models.USCensusCSV;
 
 public enum classLoader {
     INDIA(IndiaCensusCSV.class),

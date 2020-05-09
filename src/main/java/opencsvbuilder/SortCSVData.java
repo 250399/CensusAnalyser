@@ -5,7 +5,7 @@ import com.google.gson.Gson;
 import java.util.Comparator;
 import java.util.List;
 
-public class SortBuilderCSVData implements ISortBuilder {
+public class SortCSVData implements ISortBuilder {
 
 
     public String sortData(Comparator comparator, List CSVList){

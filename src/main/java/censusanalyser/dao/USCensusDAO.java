@@ -1,6 +1,6 @@
-package dao;
+package censusanalyser.dao;
 
-import models.USCensusCSV;
+import censusanalyser.models.USCensusCSV;
 
 public class USCensusDAO {
     public double populationDensity;

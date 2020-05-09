@@ -1,6 +1,6 @@
-package dao;
+package censusanalyser.dao;
 
-import models.IndiaStateCode;
+import censusanalyser.models.IndiaStateCode;
 
 public class IndiaStateDAO {
 

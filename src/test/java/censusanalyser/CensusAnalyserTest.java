@@ -1,9 +1,9 @@
 package censusanalyser;
 
-import exceptionclass.CensusAnalyserException;
-import models.IndiaCensusCSV;
-import models.IndiaStateCode;
-import models.USCensusCSV;
+import censusanalyser.exceptionclass.CensusAnalyserException;
+import censusanalyser.models.IndiaCensusCSV;
+import censusanalyser.models.IndiaStateCode;
+import censusanalyser.models.USCensusCSV;
 import opencsvbuilder.CSVBuilderException;
 import com.google.gson.Gson;
 import org.junit.Assert;
