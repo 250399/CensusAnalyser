@@ -11,7 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-
+import java.io.File;
 public class CensusAnalyserTest {
 
     private static final String INDIA_CENSUS_CSV_FILE_PATH = "./src/test/resources/IndiaStateCensusData.csv";
@@ -184,14 +184,16 @@ public class CensusAnalyserTest {
 
     @Test
     public void whenFilePathIsProper_writeIntoJsonFile_SortedDensity(){
-            censusAnalyser.loadCensusData(INDIA_CENSUS_CSV_FILE_PATH,"india");
-            censusAnalyser.writeSortedOutput_InJSONFormat_IntoAFile("IndiaStateCensusData","densityPerSqKm",JSON_OUTPUT_FILE);
+        censusAnalyser.loadCensusData(INDIA_CENSUS_CSV_FILE_PATH,"india");
+        censusAnalyser.writeSortedOutput_InJSONFormat_IntoAFile("IndiaStateCensusData","densityPerSqKm",JSON_OUTPUT_FILE);
+        Assert.assertNotNull(new File(JSON_OUTPUT_FILE));
     }
 
     @Test
     public void whenFilePathIsProper_writeIntoJsonFile_SortedByArea(){
         censusAnalyser.loadCensusData(INDIA_CENSUS_CSV_FILE_PATH,"india");
         censusAnalyser.writeSortedOutput_InJSONFormat_IntoAFile("IndiaStateCensusData","areaInSqKm",JSON_OUTPUT_FILE);
+        Assert.assertNotNull(new File(JSON_OUTPUT_FILE));
     }
 
     @Test
