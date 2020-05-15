@@ -4,7 +4,7 @@ import censusanalyser.models.IndiaCensusCSV;
 import censusanalyser.models.IndiaStateCode;
 import censusanalyser.models.USCensusCSV;
 
-public enum classLoader {
+public enum CheckClass {
     INDIA(IndiaCensusCSV.class),
     US(USCensusCSV.class),
     WRONGCLASSNAME(CensusAnalyser.class),
@@ -12,7 +12,7 @@ public enum classLoader {
 
     private Class klass;
 
-    classLoader(Class klass) {
+    CheckClass(Class klass) {
         this.klass=klass;
     }
 

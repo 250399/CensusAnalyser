@@ -1,55 +1,27 @@
  package censusanalyser;
 
-import censusanalyser.dao.IndiaStateDAO;
-import censusanalyser.dao.USCensusDAO;
 import censusanalyser.exceptionclass.CensusAnalyserException;
 import censusanalyser.models.IndiaCensusCSV;
-import censusanalyser.dao.IndiaCensusDAO;
 import censusanalyser.models.IndiaStateCode;
 import censusanalyser.models.USCensusCSV;
 import opencsvbuilder.CSVBuilderException;
 import opencsvbuilder.CSVBuilderFactory;
-import opencsvbuilder.ICSVBuilder;
 import opencsvbuilder.ISortBuilder;
 import com.google.gson.Gson;
 
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.*;
 import java.util.regex.Pattern;
-import java.util.stream.StreamSupport;
 
-public class CensusAnalyser {
+ public class CensusAnalyser {
     HashMap<String,List> hmap= new HashMap<>();
 
     public <E> int loadCensusData(String csvFilePath,String className)  {
-        Class type = classLoader.valueOf(className.toUpperCase()).getKlass();
+        Class type = CheckClass.valueOf(className.toUpperCase()).getKlass();
         checkType(type);
         match(csvFilePath);
-        try(Reader reader = Files.newBufferedReader(Paths.get(csvFilePath));){
-            ArrayList<Object> arr = new ArrayList<>();
-            ICSVBuilder builder = CSVBuilderFactory.getBuilder();
-            Iterator<E> censusCSVIterator = builder.getCSVFileIterator(reader,type);
-            Iterable<E> censusIterable = ()-> censusCSVIterator;
-            StreamSupport.stream(censusIterable.spliterator(),false)
-                    .forEach(csvCensus -> {
-                        if(type.equals(IndiaCensusCSV.class))
-                            arr.add(new IndiaCensusDAO((IndiaCensusCSV) csvCensus));
-                        else if(type.equals(USCensusCSV.class))
-                            arr.add(new USCensusDAO((USCensusCSV) csvCensus));
-                        else if(type.equals(IndiaStateCode.class))
-                            arr.add(new IndiaStateDAO((IndiaStateCode) csvCensus));
-                    });
-            hmap.put(getFileName(csvFilePath),arr);
-            return hmap.get(getFileName(csvFilePath)).size();
-        } catch (IOException e) {
-            throw new CSVBuilderException(e.getMessage(),
-                    CSVBuilderException.ExceptionType.CENSUS_FILE_PROBLEM);
-        }catch (RuntimeException e){
-            throw new CensusAnalyserException("Invalid Header",
-                    CensusAnalyserException.ExceptionType.INVALID_HEADER);
-        }
+        hmap.put(getFileName(csvFilePath),new DataLoader().loadData(csvFilePath,type));
+        return hmap.get(getFileName(csvFilePath)).size();
     }
 
     String getFileName(String csvFilePath){
